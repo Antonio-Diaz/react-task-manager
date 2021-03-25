@@ -3,7 +3,7 @@ import From from "./components/Form/Form";
 import Booking from "./components/Booking/Booking";
 
 function App() {
-  let initialBookings = localStorage.getItem("listBookings");
+  let initialBookings = JSON.parse(localStorage.getItem("listBookings")); 
   if (!initialBookings) {
     initialBookings = [];
   }
@@ -15,13 +15,12 @@ function App() {
   };
 
   useEffect(() => {
-    let initialBookings = localStorage.getItem("listBookings");
     if (initialBookings) {
       localStorage.setItem("listBookings", JSON.stringify(listBookings));
     } else {
       localStorage.setItem("listBookings", JSON.stringify([]));
     }
-  }, [listBookings]);
+  }, [listBookings, initialBookings]);
 
   const deleteBooking = (id) => {
     const newBookings = listBookings.filter((booking) => booking.id !== id);
